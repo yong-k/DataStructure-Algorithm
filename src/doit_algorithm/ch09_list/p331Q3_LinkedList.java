@@ -33,7 +33,7 @@ public class p331Q3_LinkedList<E> {
                 crnt = node;
                 return node.data;
             }
-            node = node.next
+            node = node.next;
         }
         return null;
     }
