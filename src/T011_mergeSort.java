@@ -1,22 +1,26 @@
 import java.util.ArrayList;
 
-public class T999_practice<T> {
+public class T011_mergeSort {
+    // 리스트 요소가 1개면 해당 값 리턴
+    // 1개 이상이면 리스트를 앞/뒤 2개로 나누기
     static ArrayList<Integer> mergeSplitFunc(ArrayList<Integer> list) {
         if (list.size() <= 1)
             return list;
 
-        ArrayList<Integer> leftList, rightList;
         int medium = list.size() / 2;
 
-        leftList = mergeSplitFunc(new ArrayList<>(list.subList(0, medium)));
-        rightList = mergeSplitFunc(new ArrayList<>(list.subList(medium, list.size())));
+        ArrayList<Integer> leftList, rightList;
+
+        leftList = mergeSplitFunc(new ArrayList<Integer>(list.subList(0, medium)));
+        rightList = mergeSplitFunc(new ArrayList<Integer>(list.subList(medium, list.size())));
 
         return mergeFunc(leftList, rightList);
     }
 
     static ArrayList<Integer> mergeFunc(ArrayList<Integer> leftList, ArrayList<Integer> rightList) {
         ArrayList<Integer> mergeList = new ArrayList<>();
-        int leftPoint = 0, rightPoint = 0;
+        int leftPoint = 0;
+        int rightPoint = 0;
 
         // CASE1: left/right 둘 다 있을 때
         while (leftList.size() > leftPoint && rightList.size() > rightPoint) {
@@ -43,12 +47,15 @@ public class T999_practice<T> {
 
         return mergeList;
     }
+
     public static void main(String[] args) {
         ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++)
-            list.add((int)(Math.random()*100));
+        for (int i = 0; i < 15; i++)
+            list.add((int)(Math.random() * 100));
 
         System.out.println(mergeSplitFunc(list));
+
     }
 }
 
+// Arrays.asList(arr); → 일반 배열을 ArrayList로 변환
