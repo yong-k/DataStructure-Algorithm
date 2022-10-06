@@ -22,6 +22,7 @@ public class p70 {
         } while (x != 0);
 
         // 배열의 앞쪽에 윗자리를 넣어두게끔(Q6)
+        // → 배열 완성된 후에, 역순으로 정렬하는 방법 사용
         char temp;
         for (int i = 0; i < digits / 2; i++) {
             temp = d[i];

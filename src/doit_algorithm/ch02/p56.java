@@ -23,8 +23,5 @@ public class p56 {
             System.out.printf("arr[%d] : %d\n", i, arr[i]);
         }
         System.out.printf("최댓값은 %d입니다.\n", maxOf(arr));
-
-
-
     }
 }

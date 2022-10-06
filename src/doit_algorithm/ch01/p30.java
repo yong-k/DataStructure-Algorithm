@@ -11,8 +11,9 @@ public class p30 {
 
     // Q8 (가우스의 덧셈)
     public static int gauss(int n) {
-        // 반복문을 써서 해야하나?
-        return (1+n)*n/2;
+        //return (1+n)*(n/2);
+        //--> 이러면 n이 홀수일 때, 값 제대로 안나옴
+        return (1 + n) * (n / 2) + (n % 2 == 1 ? (n + 1) / 2 : 0);
     }
 
     // Q9
