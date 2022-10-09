@@ -12,6 +12,7 @@ public class T008_sorting1 {
     static ArrayList<Integer> bubbleSort(ArrayList<Integer> list) {
         boolean swap = false;
         for (int i = 0; i < list.size() - 1; i++) {
+            swap = false;
             for (int j = 0; j < list.size() - 1 - i; j++) {
                 if (list.get(j) > list.get(j + 1)) {
                     swap = true;
@@ -44,6 +45,7 @@ public class T008_sorting1 {
         return list;
     }
 
+    // 삽입 정렬
     static ArrayList<Integer> insertionSort(ArrayList<Integer> list) {
         for (int i = 1; i < list.size(); i++) {
             for (int j = i; j > 0; j--) {
