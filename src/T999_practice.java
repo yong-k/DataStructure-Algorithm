@@ -1,55 +1,28 @@
 
 import java.io.*;
 import java.util.*;
-public class T999_practice<T> {
-    static int n;
-    static int[] dx = {0, 0, -1, 1};
-    static int[] dy = {1, -1, 0, 0};
-    static int[][] A;
-    static boolean[][] visited;
-    static ArrayList<Integer> apart = new ArrayList<>();
-    static int apartNum;
+
+public class T999_practice {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
-        A = new int[n][n];
-        visited = new boolean[n][n];
-        for (int i = 0; i < n; i++) {
-            String s = br.readLine();
-            for (int j = 0; j < n; j++) {
-                A[i][j] = s.charAt(j) - '0';
-            }
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int[] sum = new int[N + 1];
+        StringBuilder sb = new StringBuilder();
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= N; i++)
+            sum[i] = sum[i - 1] + Integer.parseInt(st.nextToken());
+
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            sb.append(sum[y] - sum[x - 1] + "\n");
         }
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (A[i][j] == 1 && !visited[i][j]) {
-                    apartNum = 0;
-                    DFS(i, j);
-                    apart.add(apartNum);
-                }
-            }
-        }
-
-        System.out.println(apart.size());
-        for (int x : apart)
-            System.out.println(x);
-    }
-
-    static void DFS(int i, int j) {
-        visited[i][j] = true;
-        apartNum++;
-
-        for (int k = 0; k < 4; k++) {
-            int x = i + dx[k];
-            int y = j + dy[k];
-            if (x >= 0 && y >= 0 && x < n && y < n) {
-                if (A[x][y] == 1 && !visited[x][y]) {
-                    DFS(x, y);
-                }
-            }
-        }
+        System.out.println(sb.toString());
     }
 }
 

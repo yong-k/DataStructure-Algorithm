@@ -10,21 +10,21 @@ public class C003_11659 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int size = Integer.parseInt(st.nextToken());
-        int[] arr = new int[size + 1];  //-- 합 배열
-        int loop = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int[] sum = new int[N + 1];
+        StringBuilder sb = new StringBuilder();
 
         st = new StringTokenizer(br.readLine());
-        for (int i = 1; i <= size; i++)
-            arr[i] = arr[i - 1] + Integer.parseInt(st.nextToken());
+        for (int i = 1; i <= N; i++)
+            sum[i] = sum[i - 1] + Integer.parseInt(st.nextToken());
 
-        int x, y = 0;
-        for (int i = 0; i < loop; i++) {
+        for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-            x = Integer.parseInt(st.nextToken());
-            y = Integer.parseInt(st.nextToken());
-            System.out.println(arr[y] - arr[x - 1]);
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            sb.append(sum[y] - sum[x - 1] + "\n");
         }
-
+        System.out.println(sb.toString());
     }
 }
