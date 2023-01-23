@@ -6,23 +6,30 @@ public class T999_practice {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] arr = new int[n];
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int[] sum = new int[N + 1];
-        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++)
+            arr[i] = Integer.parseInt(st.nextToken());
 
-        st = new StringTokenizer(br.readLine());
-        for (int i = 1; i <= N; i++)
-            sum[i] = sum[i - 1] + Integer.parseInt(st.nextToken());
+        Arrays.sort(arr);
 
-        for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-            sb.append(sum[y] - sum[x - 1] + "\n");
+        int find = Integer.parseInt(br.readLine());
+        int count = 0;
+        int start = 0;
+        int end = n - 1;
+        while (start < end) {
+            if (arr[start] + arr[end] < find)
+                start++;
+            else if (arr[start] + arr[end] > find)
+                end--;
+            else {
+                count++;
+                start++;
+                end--;
+            }
         }
-        System.out.println(sb.toString());
+        System.out.println(count);
     }
 }
 

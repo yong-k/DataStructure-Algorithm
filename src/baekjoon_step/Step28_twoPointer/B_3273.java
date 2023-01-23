@@ -12,19 +12,21 @@ public class B_3273 {
             arr[i] = Integer.parseInt(st.nextToken());
 
         Arrays.sort(arr);
-        int x = Integer.parseInt(br.readLine());
-        int start = 0;
-        int end = arr.length - 1;
+
+        int find = Integer.parseInt(br.readLine());
         int count = 0;
+        int start = 0;
+        int end = n - 1;
         while (start < end) {
-            if (arr[start] + arr[end] == x) {
+            if (arr[start] + arr[end] < find)
+                start++;
+            else if (arr[start] + arr[end] > find)
+                end--;
+            else {
                 count++;
                 start++;
                 end--;
-            } else if (arr[start] + arr[end] < x)
-                start++;
-            else
-                end--;
+            }
         }
         System.out.println(count);
     }
