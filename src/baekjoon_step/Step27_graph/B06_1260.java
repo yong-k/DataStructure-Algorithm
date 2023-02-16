@@ -3,58 +3,59 @@ package baekjoon_step.Step27_graph;
 import java.io.*;
 import java.util.*;
 public class B06_1260 {
-    static ArrayList<Integer> A[];
+    static ArrayList<Integer>[] A;
     static boolean[] visited;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int startNode = Integer.parseInt(st.nextToken());
-        A = new ArrayList[n + 1];
-        for (int i = 1; i <= n; i++)
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int V = Integer.parseInt(st.nextToken());
+        A = new ArrayList[N + 1];
+
+        for (int i = 1; i <= N; i++)
             A[i] = new ArrayList<>();
-        for (int i = 0; i < m; i++) {
+
+        for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
             A[s].add(e);
             A[e].add(s);
         }
-        for (int i = 1; i <= n; i++)
+
+        for (int i = 1; i <= N; i++)
             Collections.sort(A[i]);
 
-        visited = new boolean[n + 1];
-        DFS(startNode);
+        visited = new boolean[N + 1];
+        DFS(V);
         System.out.println();
-        visited = new boolean[n + 1];
-        BFS(startNode);
+        visited = new boolean[N + 1];
+        BFS(V);
+        System.out.println();
     }
 
-    static void DFS(int n) {
-        if (visited[n])
-            return;
-        System.out.print(n + " ");
-        visited[n] = true;
-        for (int x : A[n])
-            if (!visited[x])
-                DFS(x);
+    static void DFS(int node) {
+        System.out.print(node + " ");
+        visited[node] = true;
+        for (int i : A[node])
+            if (!visited[i])
+                DFS(i);
     }
 
-    static void BFS(int n) {
-        if (visited[n])
-            return;
+    static void BFS(int node) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(node);
+        visited[node] = true;
 
-        Queue<Integer> q = new LinkedList<>();
-        q.add(n);
-        visited[n] = true;
-        while (!q.isEmpty()) {
-            int now = q.poll();
+        while (!queue.isEmpty()) {
+            int now = queue.poll();
             System.out.print(now + " ");
-            for (int x : A[now]) {
-                if (!visited[x]) {
-                    q.add(x);
-                    visited[x] = true;
+            for (int i : A[now]) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    queue.add(i);
                 }
             }
         }
