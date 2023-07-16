@@ -2,23 +2,24 @@ package doit_codingTest;
 
 // 백준 1546
 
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class C002_1546 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++)
-            arr[i] = sc.nextInt();
-
-        int max = 0;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int[] scores = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int max = Integer.MIN_VALUE;
         int sum = 0;
-        for (int i = 0; i < n; i++) {
-            if (max < arr[i]) max = arr[i];
-            sum += arr[i];
+        for (int i = 0; i < N; i++) {
+            scores[i] = Integer.parseInt(st.nextToken());
+            sum += scores[i];
+            if (max < scores[i])
+                max = scores[i];
         }
 
-        System.out.println((double)sum / max * 100 / n);
+        System.out.println(sum * 100.0 / max / N);
     }
 }

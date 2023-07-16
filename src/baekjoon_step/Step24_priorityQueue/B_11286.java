@@ -2,7 +2,27 @@ package baekjoon_step.Step24_priorityQueue;
 
 import java.io.*;
 import java.util.*;
-
+/*
+18
+1
+-1
+0
+0
+0
+1
+1
+-1
+-1
+2
+-2
+0
+0
+0
+0
+0
+0
+0
+*/
 public class B_11286 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

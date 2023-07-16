@@ -2,7 +2,13 @@ package baekjoon_step.Step26_stack2;
 
 import java.io.*;
 import java.util.*;
+/*
+4
+3 5 2 7
 
+4
+9 5 4 8
+*/
 public class B_17298 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

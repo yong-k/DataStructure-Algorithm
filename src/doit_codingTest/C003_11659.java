@@ -6,6 +6,13 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 // 백준 11659
+/*
+5 3
+5 4 3 2 1
+1 3
+2 4
+5 5
+*/
 public class C003_11659 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

@@ -8,37 +8,38 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 // 백준 1940
+/*
+6
+9
+2 7 4 1 5 3
+*/
 public class C007_1940 {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        int count = 0;
-        long[] arr = new long[N];
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < arr.length; i++)
-            arr[i] = Long.parseLong(st.nextToken());
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++)
+            arr[i] = sc.nextInt();
 
         Arrays.sort(arr);
 
-        for (int i = 0; i < arr.length; i++) {
-            long find = arr[i];
-            int start = 0;
-            int end = N - 1;
-            while (start < end) {
-                if (arr[start] + arr[end] == find) {
-                    if (start != i && end != i) {
-                        count++;
-                        break;
-                    } else if (start == i)
-                        start++;
-                    else
-                        end--;
-                } else if (arr[start] + arr[end] < find)
-                    start++;
-                else
-                    end--;
+        int answer = 0;
+        int s = 0;
+        int e = arr.length - 1;
+        while (s < e) {
+            int sum = arr[s] + arr[e];
+            if (sum == M) {
+                answer++;
+                s++;
+                e--;
+            } else if (sum < M) {
+                s++;
+            } else {
+                e--;
             }
         }
-        System.out.println(count);
+
+        System.out.println(answer);
     }
 }

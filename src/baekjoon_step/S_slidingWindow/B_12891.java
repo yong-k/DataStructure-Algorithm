@@ -3,6 +3,16 @@ package baekjoon_step.S_slidingWindow;
 import java.io.*;
 import java.util.*;
 
+/*
+9 8
+CCTGGATTG
+2 0 1 1
+
+4 2
+GATA
+1 0 0 1
+*/
+
 public class B_12891 {
 
     static int checkArr[];

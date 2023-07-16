@@ -3,6 +3,11 @@ package baekjoon_step.S_slidingWindow;
 import java.io.*;
 import java.util.*;
 
+/*
+12 3
+1 5 2 3 6 2 3 7 3 5 2 6
+*/
+
 public class B_11003 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

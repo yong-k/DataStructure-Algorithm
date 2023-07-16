@@ -166,4 +166,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+src/hyundai_autoever_230218/*
+src/hyundai_ngv_230302/*
+src/hyundai_autoever_230513/*
+
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,intellij

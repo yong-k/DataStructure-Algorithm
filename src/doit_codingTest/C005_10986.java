@@ -7,6 +7,10 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 // 백준 10986
+/*
+5 3
+1 2 3 1 2
+*/
 public class C005_10986 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

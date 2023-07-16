@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 // 백준 1253
+/*
+10
+1 2 3 4 5 6 7 8 9 10
+*/
 public class C008_1253 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
