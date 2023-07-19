@@ -1,6 +1,6 @@
 package tony_git.data_structure;
 
-// https://steady-coding.tistory.com/search/2504
+// https://steady-coding.tistory.com/search/9012
 import java.util.*;
 public class B_9012 {
     public static void main(String[] args) {
