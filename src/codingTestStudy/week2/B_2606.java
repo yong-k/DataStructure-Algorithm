@@ -1,6 +1,8 @@
+package codingTestStudy.week2;
+
 import java.util.*;
 import java.io.*;
-public class T999_practice {
+public class B_2606 {
     static ArrayList<Integer>[] A;
     static boolean[] visited;
     static int count;
@@ -43,4 +45,3 @@ public class T999_practice {
         }
     }
 }
-
