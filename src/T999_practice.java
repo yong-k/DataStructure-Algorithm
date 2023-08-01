@@ -1,44 +1,46 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 public class T999_practice {
-    static int N, K;
-    static int[] check;
+    static int N, M;
+    static int[][] map;
+    static int[][] distance;
+    static int[] dx = {0, 0, -1, 1};
+    static int[] dy = {1, -1, 0, 0};
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
-        check = new int[100001];
-        for (int i = 0; i < check.length; i++)
-            check[i] = -1;
+        M = Integer.parseInt(st.nextToken());
+        map = new int[N][M];
+        distance = new int[N][M];
 
-        if (N == K) {
-            System.out.println(0);
-            return;
-        } else {
-            BFS(N, K);
-            System.out.println(check[K]);
+        for (int i = 0; i < N; i++) {
+            String s = br.readLine();
+            for (int j = 0; j < M; j++)
+                map[i][j] = s.charAt(j) - '0';
         }
+
+        BFS(0, 0);
+        System.out.println(distance[N - 1][M - 1]);
     }
 
-    static void BFS(int N, int K) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(N);
-        check[N] = 0;
+    static void BFS(int i, int j) {
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{i, j});
+        distance[i][j] = 1;
 
         while (!queue.isEmpty()) {
-            int x = queue.poll();
-            if (2 * x < check.length && check[2 * x] == -1) {
-                queue.add(x * 2);
-                check[2 * x] = check[x];
-            }
-            if (x - 1 >= 0 && check[x - 1] == -1) {
-                queue.add(x - 1);
-                check[x - 1] = check[x] + 1;
-            }
-            if (x + 1 < check.length && check[x + 1] == -1) {
-                queue.add(x + 1);
-                check[x + 1] = check[x] + 1;
+            int[] now = queue.poll();
+            for (int k = 0; k < 4; k++) {
+                int x = now[0] + dx[k];
+                int y = now[1] + dy[k];
+                if (x >= 0 && y >= 0 && x < N && y < M) {
+                    if (map[x][y] == 1 && distance[x][y] == 0) {
+                        queue.add(new int[]{x, y});
+                        distance[x][y] = distance[now[0]][now[1]] + 1;
+                    }
+                }
             }
         }
     }

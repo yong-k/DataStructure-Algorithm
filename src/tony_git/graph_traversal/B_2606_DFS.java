@@ -1,24 +1,25 @@
 package tony_git.graph_traversal;
 
+import java.io.*;
 import java.util.*;
 public class B_2606_DFS {
+    static int computer, network;
     static ArrayList<Integer>[] A;
     static boolean[] visited;
     static int count;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        computer = Integer.parseInt(br.readLine());
+        network = Integer.parseInt(br.readLine());
+        A = new ArrayList[computer + 1];
+        visited = new boolean[computer + 1];
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int computers = sc.nextInt();
-        int networks = sc.nextInt();
-        A = new ArrayList[computers + 1];
-        visited = new boolean[computers + 1];
-
-        for (int i = 1; i <= computers; i++)
+        for (int i = 1; i <= computer; i++)
             A[i] = new ArrayList<>();
-
-        for (int i = 0; i < networks; i++) {
-            int s = sc.nextInt();
-            int e = sc.nextInt();
+        for (int i = 0; i < network; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
             A[s].add(e);
             A[e].add(s);
         }

@@ -1,46 +1,46 @@
 package tony_git.graph_traversal;
 
+import java.io.*;
 import java.util.*;
-import java.awt.Point;
 public class B_2178 {
     static int N, M;
     static int[][] map;
-    static boolean[][] visited;
+    static int[][] distance;
     static int[] dx = {0, 0, -1, 1};
     static int[] dy = {1, -1, 0, 0};
-    static int answer;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        M = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
         map = new int[N][M];
-        visited = new boolean[N][M];
+        distance = new int[N][M];
 
         for (int i = 0; i < N; i++) {
-            String s = sc.next();
+            String s = br.readLine();
             for (int j = 0; j < M; j++)
                 map[i][j] = s.charAt(j) - '0';
         }
 
         BFS(0, 0);
-        System.out.println(map[N-1][M-1]);
+        System.out.println(distance[N - 1][M - 1]);
     }
 
     static void BFS(int i, int j) {
-        Queue<Point> queue = new LinkedList<>();
-        queue.add(new Point(i, j));
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{i, j});
+        distance[i][j] = 1;
 
         while (!queue.isEmpty()) {
-            Point now = queue.poll();
+            int[] now = queue.poll();
             for (int k = 0; k < 4; k++) {
-                int x = now.x + dx[k];
-                int y = now.y + dy[k];
+                int x = now[0] + dx[k];
+                int y = now[1] + dy[k];
                 if (x >= 0 && y >= 0 && x < N && y < M) {
-                    if (map[x][y] != 0 && !visited[x][y]) {
-                        visited[x][y] = true;
-                        map[x][y] = map[now.x][now.y] + 1;
-                        queue.add(new Point(x, y));
+                    if (map[x][y] == 1 && distance[x][y] == 0) {
+                        queue.add(new int[]{x, y});
+                        distance[x][y] = distance[now[0]][now[1]] + 1;
                     }
                 }
             }
