@@ -1,6 +1,4 @@
-package codingTestStudy.week3;
-
-// https://st-lab.tistory.com/277
+package tony_git.binary_search;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,9 +27,9 @@ public class B_2110 {
         while (left <= right) {
             int mid = (left + right) / 2;
             /*
-             * 설치가능한 공유기 개수가 C에 못 미치면, 거리를 좁혀야 하므로
-             * right = mid - 1 로 줄여준다.
-             * */
+            * 설치가능한 공유기 개수가 C에 못 미치면, 거리를 좁혀야 하므로
+            * right = mid - 1 로 줄여준다.
+            * */
             if (canInstall(mid) < C)
                 right = mid - 1;
             else
@@ -40,17 +38,17 @@ public class B_2110 {
         System.out.println(right);
     }
 
-    // distance에 대해 설치 가능한 공유기 개수를 찾는다.
+    // distance에 대해 설치 가능한 공유기 개수를 반환한다.
     static int canInstall(int distance) {
         int count = 1;
         int lastLocate = house[0];
 
         for (int i = 1; i < house.length; i++) {
             /*
-             * 현재 집의 위치와 직전에 설치했던 집의 거리가
-             * distance보다 크거나 같다면, 공유기 설치 개수 늘려주고
-             * 마지막 설치 위치 갱신해준다.
-             * */
+            * 현재 집의 위치와 직전에 설치했던 집의 거리가
+            * distance보다 크거나 같다면, 공유기 설치 개수 늘려주고
+            * 마지막 설치 위치 갱신해준다.
+            * */
             int locate = house[i];
             if (locate - lastLocate >= distance) {
                 count++;
