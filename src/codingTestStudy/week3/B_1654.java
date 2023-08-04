@@ -1,9 +1,9 @@
 package codingTestStudy.week3;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
+// https://st-lab.tistory.com/269
+// https://wonit.tistory.com/422
+
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class B_1654 {
@@ -13,12 +13,30 @@ public class B_1654 {
         int K = Integer.parseInt(st.nextToken());   // 이미 가지고 있는 랜선 개수
         int N = Integer.parseInt(st.nextToken());   // 필요한 랜선 개수
         int[] arr = new int[K];
+        long max = 0;
 
-        for (int i = 0; i < K; i++)
+        for (int i = 0; i < K; i++) {
             arr[i] = Integer.parseInt(br.readLine());
+            max = Math.max(max, arr[i]);
+        }
 
-        Arrays.sort(arr);
+        long start = 1;
+        long end = max;
+        long answer = 0;
+        while (start <= end) {
+            long count = 0;
+            long mid = (start + end) / 2;
+            for (int i = 0; i < arr.length; i++)
+                count += arr[i] / mid;
 
-
+            if (count >= N) {
+                // 더 늘려도 되는지 확인해봐야지
+                start = mid + 1;
+                answer = Math.max(answer, mid);
+            } else {
+                end = mid - 1;
+            }
+        }
+        System.out.println(answer);
     }
 }

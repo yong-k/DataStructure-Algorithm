@@ -1,48 +1,37 @@
 import java.io.*;
 import java.util.*;
 public class T999_practice {
-    static int N, M;
-    static int[][] map;
-    static int[][] distance;
-    static int[] dx = {0, 0, -1, 1};
-    static int[] dy = {1, -1, 0, 0};
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        map = new int[N][M];
-        distance = new int[N][M];
+        int K = Integer.parseInt(st.nextToken());   // 이미 가지고 있는 랜선 개수
+        int N = Integer.parseInt(st.nextToken());   // 필요한 랜선 개수
+        int[] arr = new int[K];
+        long max = 0;
 
-        for (int i = 0; i < N; i++) {
-            String s = br.readLine();
-            for (int j = 0; j < M; j++)
-                map[i][j] = s.charAt(j) - '0';
+        for (int i = 0; i < K; i++) {
+            arr[i] = Integer.parseInt(br.readLine());
+            max = Math.max(max, arr[i]);
         }
 
-        BFS(0, 0);
-        System.out.println(distance[N - 1][M - 1]);
-    }
+        long start = 1;
+        long end = max;
+        long answer = 0;
+        while (start <= end) {
+            long count = 0;
+            long mid = (start + end) / 2;
+            for (int i = 0; i < arr.length; i++)
+                count += arr[i] / mid;
 
-    static void BFS(int i, int j) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{i, j});
-        distance[i][j] = 1;
-
-        while (!queue.isEmpty()) {
-            int[] now = queue.poll();
-            for (int k = 0; k < 4; k++) {
-                int x = now[0] + dx[k];
-                int y = now[1] + dy[k];
-                if (x >= 0 && y >= 0 && x < N && y < M) {
-                    if (map[x][y] == 1 && distance[x][y] == 0) {
-                        queue.add(new int[]{x, y});
-                        distance[x][y] = distance[now[0]][now[1]] + 1;
-                    }
-                }
+            if (count >= N) {
+                // 더 늘려도 되는지 확인해봐야지
+                start = mid + 1;
+                answer = Math.max(answer, mid);
+            } else {
+                end = mid - 1;
             }
         }
+        System.out.println(answer);
     }
 }
 
