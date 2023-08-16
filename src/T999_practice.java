@@ -1,25 +1,41 @@
+
 import java.io.*;
 import java.util.*;
 public class T999_practice {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int[] arr = new int[N + 1];
-
-        st = new StringTokenizer(br.readLine());
-        for (int i = 1; i <= N; i++)
-            arr[i] = Integer.parseInt(st.nextToken()) + arr[i - 1];
-
+        int T = Integer.parseInt(br.readLine());
+        Stack<Character> stack;
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int s = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
-            sb.append(arr[e] - arr[s - 1]).append('\n');
+
+        for (int i = 0; i < T; i++) {
+            String s = br.readLine();
+            stack = new Stack<>();
+            boolean noFlag = false;
+
+            for (int j = 0; j < s.length(); j++) {
+                noFlag = false;
+                char now = s.charAt(j);
+                if (now == '(') {
+                    stack.push(now);
+                } else {
+                    if (stack.isEmpty()) {
+                        noFlag = true;
+                        break;
+                    } else if (stack.peek() == '(') {
+                        stack.pop();
+                    } else {
+                        noFlag = true;
+                        break;
+                    }
+                }
+            }
+            if (stack.isEmpty() && !noFlag)
+                sb.append("YES").append('\n');
+            else
+                sb.append("NO").append('\n');
         }
-        System.out.print(sb);
+        System.out.println(sb);
     }
 }
 
