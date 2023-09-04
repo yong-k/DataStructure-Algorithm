@@ -1,55 +1,69 @@
 package tony_git.graph_traversal;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 public class B_1260 {
     static ArrayList<Integer>[] A;
     static boolean[] visited;
+    static StringBuilder sb;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int M = sc.nextInt();
-        int V = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int V = Integer.parseInt(st.nextToken());
         A = new ArrayList[N + 1];
 
         for (int i = 1; i <= N; i++)
             A[i] = new ArrayList<>();
 
         for (int i = 0; i < M; i++) {
-            int s = sc.nextInt();
-            int e = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+
             A[s].add(e);
             A[e].add(s);
         }
 
-        // 방문할 수 있는 정점이 여러 개인 경우에는 번호 작은 것부터 방문
         for (int i = 1; i <= N; i++)
             Collections.sort(A[i]);
 
         visited = new boolean[N + 1];
-        DFS(V);
-        System.out.println();
+        sb = new StringBuilder();
+        dfs(V);
+
+        System.out.println(sb);
+
         visited = new boolean[N + 1];
-        BFS(V);
+        sb = new StringBuilder();
+        bfs(V);
+        System.out.println(sb);
+
     }
 
-    static void DFS(int node) {
-        System.out.print(node + " ");
+    static void dfs(int node) {
+        sb.append(node).append(' ');
         visited[node] = true;
+
         for (int i : A[node]) {
             if (!visited[i])
-                DFS(i);
+                dfs(i);
         }
     }
 
-    static void BFS(int node) {
+    static void bfs(int node) {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(node);
         visited[node] = true;
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             int now = queue.poll();
-            System.out.print(now + " ");
+            sb.append(now).append(' ');
+
             for (int i : A[now]) {
                 if (!visited[i]) {
                     queue.add(i);

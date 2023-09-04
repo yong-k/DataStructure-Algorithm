@@ -5,6 +5,7 @@ import java.util.*;
 public class B06_1260 {
     static ArrayList<Integer>[] A;
     static boolean[] visited;
+    static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,6 +22,7 @@ public class B06_1260 {
             st = new StringTokenizer(br.readLine());
             int s = Integer.parseInt(st.nextToken());
             int e = Integer.parseInt(st.nextToken());
+
             A[s].add(e);
             A[e].add(s);
         }
@@ -29,33 +31,41 @@ public class B06_1260 {
             Collections.sort(A[i]);
 
         visited = new boolean[N + 1];
-        DFS(V);
-        System.out.println();
+        sb = new StringBuilder();
+        dfs(V);
+
+        System.out.println(sb);
+
         visited = new boolean[N + 1];
-        BFS(V);
-        System.out.println();
+        sb = new StringBuilder();
+        bfs(V);
+        System.out.println(sb);
+
     }
 
-    static void DFS(int node) {
-        System.out.print(node + " ");
+    static void dfs(int node) {
+        sb.append(node).append(' ');
         visited[node] = true;
-        for (int i : A[node])
+
+        for (int i : A[node]) {
             if (!visited[i])
-                DFS(i);
+                dfs(i);
+        }
     }
 
-    static void BFS(int node) {
+    static void bfs(int node) {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(node);
         visited[node] = true;
 
         while (!queue.isEmpty()) {
             int now = queue.poll();
-            System.out.print(now + " ");
+            sb.append(now).append(' ');
+
             for (int i : A[now]) {
                 if (!visited[i]) {
-                    visited[i] = true;
                     queue.add(i);
+                    visited[i] = true;
                 }
             }
         }
