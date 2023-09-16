@@ -8,28 +8,29 @@ public class B_1764 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        HashMap<String, Integer> map = new HashMap<>();
-        List<String> result = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
 
+        // 듣도 못한 사람 ∩ 보도 못한 사람
+        HashMap<String, Integer> map = new HashMap<>();
         for (int i = 0; i < N + M; i++) {
             String name = br.readLine();
-            if (!map.containsKey(name))
-                map.put(name, 1);
-            else
-                map.put(name, map.get(name) + 1);
+            map.put(name, map.getOrDefault(name, 0) + 1);
         }
 
-        for (String name : map.keySet()) {
-            if (map.get(name) > 1)
-                result.add(name);
+        // map 돌면서, 개수가 2인 거 찾아서 names 리스트에 추가
+        List<String> names = new ArrayList<>();
+        for (String key : map.keySet()) {
+            if (map.get(key) >= 2)
+                names.add(key);
         }
 
-        Collections.sort(result);
-        sb.append(result.size()).append('\n');
-        for (String name : result)
+        // 사전순으로 출력 → names 리스트 정렬
+        Collections.sort(names);
+
+        // 결과 출력
+        StringBuilder sb = new StringBuilder();
+        sb.append(names.size()).append('\n');
+        for (String name : names)
             sb.append(name).append('\n');
-
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
