@@ -1,51 +1,55 @@
 package tony_git.data_structure;
 
+import java.io.*;
 import java.util.*;
 public class B_1966 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < T; i++) {
-            int N = sc.nextInt();
-            int checkNum = sc.nextInt();
-            Queue<Document> que = new LinkedList<>();
-            PriorityQueue<Document> pq = new PriorityQueue<>((o1, o2) -> {
-                return o2.priority - o1.priority;
+        for (int k = 0; k < T; k++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken());
+            Queue<Document> queue = new LinkedList<>();
+            PriorityQueue<Document> pq = new PriorityQueue<>((d1, d2) -> {
+                return d2.priority - d1.priority;
             });
 
-            for (int j = 0; j < N; j++) {
-                int priority = sc.nextInt();
-                que.add(new Document(j, priority));
-                pq.add(new Document(j, priority));
+            st = new StringTokenizer(br.readLine());
+            for (int i = 0; i < N; i++) {
+                int priority = Integer.parseInt(st.nextToken());
+                queue.add(new Document(i, priority));
+                pq.add(new Document(i, priority));
             }
 
+            // document의 order와 M이 같은 걸 찾으면 된다.
             int count = 1;
-            while (!que.isEmpty()) {
-                Document now = que.poll();
+            while (!queue.isEmpty()) {
+                Document now = queue.poll();
                 if (now.priority == pq.peek().priority) {
-                    if (now.order == checkNum) {
+                    if (now.order == M) {
                         sb.append(count).append('\n');
                         break;
                     }
                     pq.poll();
                     count++;
                 } else {
-                    que.add(now);
+                    queue.add(now);
                 }
             }
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
+}
 
-    static class Document {
-        int order;
-        int priority;
+class Document {
+    int order;
+    int priority;
 
-        public Document(int order, int priority) {
-            this.order = order;
-            this.priority = priority;
-        }
+    public Document(int order, int priority) {
+        this.order = order;
+        this.priority = priority;
     }
 }
