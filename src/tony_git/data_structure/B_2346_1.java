@@ -1,7 +1,7 @@
 package tony_git.data_structure;
 
 import java.util.*;
-public class B_2346 {
+public class B_2346_1 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
