@@ -1,14 +1,12 @@
 package tony_git.graph_traversal;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class B_1012 {
-    static int w, h;
+    static int M, N;
     static int[][] map;
     static boolean[][] visited;
     static int[] dx = {0, 0, -1, 1};
@@ -16,35 +14,37 @@ public class B_1012 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int T = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
-        for (int k = 0; k < T; k++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            w = Integer.parseInt(st.nextToken());   // 가로
-            h = Integer.parseInt(st.nextToken());   // 세로
-            map = new int[w][h];
-            visited = new boolean[w][h];
 
-            int n = Integer.parseInt(st.nextToken());   // 배추 위치 개수
-            for (int i = 0; i < n; i++) {
+        for (int t = 0; t < T; t++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            M = Integer.parseInt(st.nextToken());
+            N = Integer.parseInt(st.nextToken());
+            int K = Integer.parseInt(st.nextToken());
+            map = new int[N][M];
+            visited = new boolean[N][M];
+
+            for (int i = 0; i < K; i++) {
                 st = new StringTokenizer(br.readLine());
-                int x = Integer.parseInt(st.nextToken());
                 int y = Integer.parseInt(st.nextToken());
+                int x = Integer.parseInt(st.nextToken());
                 map[x][y] = 1;
             }
 
             int count = 0;
-            for (int i = 0; i < w; i++) {
-                for (int j = 0; j < h; j++) {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
                     if (map[i][j] == 1 && !visited[i][j]) {
                         bfs(i, j);
                         count++;
                     }
                 }
             }
-            sb.append(count).append('\n');
+            bw.write(count + "\n");
         }
-        System.out.print(sb);
+        bw.flush();
+        bw.close();
     }
 
     static void bfs(int i, int j) {
@@ -57,11 +57,10 @@ public class B_1012 {
             for (int k = 0; k < 4; k++) {
                 int x = now[0] + dx[k];
                 int y = now[1] + dy[k];
-                if (x >= 0 && y >= 0 && x < w && y < h) {
-                    if (map[x][y] == 1 && !visited[x][y]) {
-                        queue.add(new int[]{x, y});
-                        visited[x][y] = true;
-                    }
+                if (x < 0 || y < 0 || x >= N || y >= M) continue;
+                if (map[x][y] == 1 && !visited[x][y]) {
+                    visited[x][y] = true;
+                    queue.add(new int[]{x, y});
                 }
             }
         }
