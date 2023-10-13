@@ -1,7 +1,7 @@
 package tony_git.data_structure2;
 
 import java.util.*;
-public class B_1620 {
+public class B_1620_map2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();

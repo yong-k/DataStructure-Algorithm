@@ -1,23 +1,30 @@
 package tony_git.data_structure2;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 public class B_11279 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        StringBuilder sb = new StringBuilder();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
 
+        // 우선순위 큐 내림차순 정렬 정의
+        // PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> {
+            return o2 - o1;
+        });
+
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++) {
-            int n = sc.nextInt();
-            if (n == 0 && pq.isEmpty()) {
-                sb.append(0).append('\n');
-                continue;
-            } else if (n == 0)
-                sb.append(pq.poll()).append('\n');
+            int input = Integer.parseInt(br.readLine());
+
+            if (input == 0)
+                sb.append(pq.isEmpty() ? 0 : pq.poll()).append('\n');
             else
-                pq.add(n);
+                pq.add(input);
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
 }
