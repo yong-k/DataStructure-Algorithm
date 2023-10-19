@@ -6,7 +6,7 @@ public class B_1436 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         int count = 0;
-        int movieNum = 0;
+        int movieNum = 665;
         while (count != N) {
             movieNum++;
             if (String.valueOf(movieNum).contains("666"))
