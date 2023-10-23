@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class B_1149 {
+public class B_1149_recur {
     final static int RED = 0;
     final static int GREEN = 1;
     final static int BLUE = 2;
