@@ -1,72 +1,25 @@
 
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 public class T999_practice {
-    static int N, M;
-    static int[][] map;
-    static ArrayList<Point> house;
-    static ArrayList<Point> chicken;
-    static int answer;
-    static boolean[] open;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        map = new int[N][N];
-        house = new ArrayList<>();
-        chicken = new ArrayList<>();
-
-        for (int i = 0; i < N; i++) {
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st;
+        int num = 1;
+        while (true) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < N; j++) {
-                map[i][j] = Integer.parseInt(st.nextToken());
-                if (map[i][j] == 1)
-                    house.add(new Point(i, j));
-                else if (map[i][j] == 2)
-                    chicken.add(new Point(i, j));
-            }
-        }
+            int L = Integer.parseInt(st.nextToken());   // L일만 사용가능
+            int P = Integer.parseInt(st.nextToken());   // 연속하는 P일 중
+            int V = Integer.parseInt(st.nextToken());   // V일 휴가
 
-        answer = Integer.MAX_VALUE;
-        open = new boolean[chicken.size()];
-        dfs(0, 0);
-        System.out.println(answer);
-    }
+            if (L == 0 && P == 0 && V == 0) break;
 
-    static void dfs(int start, int count) {
-        if (count == M) {
-            int result = 0;
-            for (int i = 0; i < house.size(); i++) {
-                int temp = Integer.MAX_VALUE;
-                for (int j = 0; j < chicken.size(); j++) {
-                    if (open[j]) {
-                        int distance = Math.abs(house.get(i).x - chicken.get(j).x)
-                                + Math.abs(house.get(i).y - chicken.get(j).y);
-                        temp = Math.min(temp, distance);
-                    }
-                }
-                result += temp;
-            }
-            answer = Math.min(answer, result);
-            return;
-        }
+            int answer = 0;
+            answer += (V / P * L) + Math.min(V % P, L);
 
-        for (int i = start; i < chicken.size(); i++) {
-            open[i] = true;
-            dfs(i + 1, count + 1);
-            open[i] = false;
+            sb.append("Case " + num++ + ": " + answer).append('\n');
         }
-    }
-
-    static class Point {
-        int x;
-        int y;
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
+        System.out.print(sb);
     }
 }
