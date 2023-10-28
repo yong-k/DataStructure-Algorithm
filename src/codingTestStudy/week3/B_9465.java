@@ -1,6 +1,7 @@
 package codingTestStudy.week3;
 
 // https://fbtmdwhd33.tistory.com/76
+// https://small-stap.tistory.com/11
 
 import java.io.BufferedReader;
 import java.io.IOException;

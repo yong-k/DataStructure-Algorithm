@@ -1,44 +1,58 @@
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.io.*;
 import java.util.*;
 
 public class T999_practice_home {
-    final static int RED = 0;
-    final static int GREEN = 1;
-    final static int BLUE = 2;
-    static int[][] cost;
-    static int[][] dp;
+    static int N;
+    static int[][] map;     // 도둑루피 값 배열
+    static int[][] rupee;   // 잃게 되는 최소 루피 계산하기 위한 배열
+    static int[] dx = {0, 0, -1, 1};
+    static int[] dy = {1, -1, 0, 0};
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        cost = new int[N][3];
-        dp = new int[N][3];
-
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
-        for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
-            cost[i][RED] = Integer.parseInt(st.nextToken());
-            cost[i][GREEN] = Integer.parseInt(st.nextToken());
-            cost[i][BLUE] = Integer.parseInt(st.nextToken());
+        int num = 1;
+        while (true) {
+            N = Integer.parseInt(br.readLine());    // 동굴 가로,세로 크기
+            if (N == 0) break;
+
+            map = new int[N][N];
+            rupee = new int[N][N];
+
+            for (int i = 0; i < N; i++) {
+                st = new StringTokenizer(br.readLine());
+                for (int j = 0; j < N; j++) {
+                    map[i][j] = Integer.parseInt(st.nextToken());
+                    rupee[i][j] = Integer.MAX_VALUE;    // rupee[][] 초기화
+                }
+            }
+
+            bfs(0, 0);
+            sb.append("Problem " + num++ + ": ").append(rupee[N - 1][N - 1]).append('\n');
         }
-
-        dp[0][RED] = cost[0][RED];
-        dp[0][GREEN] = cost[0][GREEN];
-        dp[0][BLUE] = cost[0][BLUE];
-
-        System.out.println(Math.min(paintHouse(N - 1, RED), Math.min(paintHouse(N - 1, GREEN), paintHouse(N - 1, BLUE))));
+        System.out.print(sb);
     }
 
-    static int paintHouse(int n, int color) {
-        if (dp[n][color] == 0) {
-            if (color == RED)
-                dp[n][RED] = Math.min(paintHouse(n - 1, GREEN), paintHouse(n - 1, BLUE)) + cost[n][RED];
-            else if (color == GREEN)
-                dp[n][GREEN] = Math.min(paintHouse(n - 1, RED), paintHouse(n - 1, BLUE)) + cost[n][GREEN];
-            else
-                dp[n][BLUE] = Math.min(paintHouse(n - 1, RED), paintHouse(n - 1, GREEN)) + cost[n][BLUE];
+    static void bfs(int i, int j) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> {
+            // 잃는 금액 오름차순 정렬 정의
+            return rupee[o1[0]][o1[1]] - rupee[o2[0]][o2[1]];
+        });
+        pq.add(new int[]{i, j});
+        rupee[i][j] = map[i][j];
+
+        while (!pq.isEmpty()) {
+            int[] now = pq.poll();
+            for (int k = 0; k < 4; k++) {
+                int x = now[0] + dx[k];
+                int y = now[1] + dy[k];
+
+                if (x < 0 || y < 0 || x >= N || y >= N) continue;
+                if (rupee[x][y] == Integer.MAX_VALUE) {
+                    rupee[x][y] = Math.min(rupee[x][y], rupee[now[0]][now[1]] + map[x][y]);
+                    pq.add(new int[]{x, y});
+                }
+            }
         }
-        return dp[n][color];
     }
 }

@@ -1,7 +1,5 @@
 package codingTestStudy.week3;
 
-// https://st-lab.tistory.com/192
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,15 +20,12 @@ public class B_13305 {
         for (int i = 0; i < oilPrice.length; i++)
             oilPrice[i] = Long.parseLong(st.nextToken());
 
-        long sum = 0;
-        long minPrice = oilPrice[0];
+        long answer = 0;
+        long minOilPrice = oilPrice[0];
         for (int i = 0; i < N - 1; i++) {
-            // 이전 주유소보다 기름 가격 저렴하면, 기름값 갱신
-            if (oilPrice[i] < minPrice)
-                minPrice = oilPrice[i];
-
-            sum += minPrice * distance[i];
+            minOilPrice = Math.min(minOilPrice, oilPrice[i]);
+            answer += minOilPrice * distance[i];
         }
-        System.out.println(sum);
+        System.out.println(answer);
     }
 }

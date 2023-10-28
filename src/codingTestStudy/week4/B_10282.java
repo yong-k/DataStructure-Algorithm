@@ -66,9 +66,10 @@ public class B_10282 {
             int count = 0;
             int maxTime = Integer.MIN_VALUE;
             for (int i = 1; i <= n; i++) {
-                if (visited[i]) count++;
-                if (infection[i] != Integer.MAX_VALUE)
+                if (visited[i]) {
+                    count++;
                     maxTime = Math.max(maxTime, infection[i]);
+                }
             }
             sb.append(count).append(' ').append(maxTime).append('\n');
         }
