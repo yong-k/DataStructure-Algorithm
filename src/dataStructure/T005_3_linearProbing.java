@@ -1,3 +1,5 @@
+package dataStructure;
+
 public class T005_3_linearProbing {
     public Slot[] hashTable;
 

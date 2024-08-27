@@ -1,3 +1,5 @@
+package dataStructure;
+
 public class T005_1_hashTable {
     public Slot[] hashTable;    // slot 기반으로 배열 생성
 

@@ -1,4 +1,4 @@
-// 스택(Stack)
+package dataStructure;// 스택(Stack)
 // ex) 재귀용법 호출방식
 
 import java.util.Stack;

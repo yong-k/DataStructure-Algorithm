@@ -1,4 +1,4 @@
-// 배열(Array)
+package dataStructure;// 배열(Array)
 
 import java.util.ArrayList;
 import java.util.Arrays;

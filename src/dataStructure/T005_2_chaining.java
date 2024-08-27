@@ -1,3 +1,5 @@
+package dataStructure;
+
 public class T005_2_chaining {
     public Slot[] hashTable;
 

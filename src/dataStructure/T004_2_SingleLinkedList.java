@@ -1,3 +1,5 @@
+package dataStructure;
+
 public class T004_2_SingleLinkedList {
     public static class SingleLinkedList<T> {
         public Node<T> head = null;
@@ -110,7 +112,7 @@ public class T004_2_SingleLinkedList {
         System.out.println(sl.head.data);       // 1
         System.out.println(sl.head.next);       // null
         sl.addNode(2);
-        System.out.println(sl.head.next);       // T004_2_SingleLinkedList$SingleLinkedList$Node@677327b6
+        System.out.println(sl.head.next);       // dataStructure.T004_2_SingleLinkedList$SingleLinkedList$Node@677327b6
         System.out.println(sl.head.next.data);  // 2
         sl.addNode(3);
         sl.printAll();                          // 1 2 3

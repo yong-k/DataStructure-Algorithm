@@ -1,15 +1,14 @@
-// · ArrayList에서 요소 모두 추가하기 → list.addAll();
+package dataStructure;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class T014_BFS {
-    // 너비 우선 탐색 (Breadth-First Search)
-    // BFS 시간복잡도: O(V+E) : 전체 노드(Vertex)와 간선(Edge)을 한 번 다 훑기 때문에
-    // needVisit 큐, visted 큐 사용해서 구현 (2개의 큐 사용)
-
-    public ArrayList<String> bfsFunc(HashMap<String, ArrayList<String>> graph, String startNode) {
+public class T015_DFS {
+    // 깊이 우선 탐색 (Depth-First Search)
+    // DFS 시간복잡도: O(V+E) : 전체 노드(Vertex)와 간선(dataStructure.Edge)을 한 번 다 훑기 때문에
+    // needVisit 스택, visted 큐 사용해서 구현 (스택, 큐 사용)
+    public ArrayList<String> dfsFunc(HashMap<String, ArrayList<String>> graph, String startNode) {
         ArrayList<String> visited = new ArrayList<String>();
         ArrayList<String> needVisit = new ArrayList<String>();
 
@@ -18,7 +17,10 @@ public class T014_BFS {
 
         while (needVisit.size() > 0) {
             count++;
-            String node = needVisit.remove(0);
+
+            // BFS와 이 부분만 다름 (큐 → 스택)
+            String node = needVisit.remove(needVisit.size() - 1);
+
             if (!visited.contains(node)) {
                 visited.add(node);
                 needVisit.addAll(graph.get(node));
@@ -42,7 +44,7 @@ public class T014_BFS {
         graph.put("I", new ArrayList<String>(Arrays.asList("C", "J")));
         graph.put("J", new ArrayList<String>(Arrays.asList("I")));
 
-        T014_BFS bfs = new T014_BFS();
-        System.out.println(bfs.bfsFunc(graph, "A"));
+        T015_DFS dfs = new T015_DFS();
+        System.out.println(dfs.dfsFunc(graph, "A"));
     }
 }

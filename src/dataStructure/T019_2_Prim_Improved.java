@@ -1,13 +1,12 @@
-// prim 알고리즘은 edge를 중심으로 했다면,
+package dataStructure;// prim 알고리즘은 edge를 중심으로 했다면,
 // 개선된 prim 알고리즘은 vertex(node)를 중심으로!
 // 다익스트라처럼 하는 것
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
-// Edge 구성도 다름
+// dataStructure.Edge 구성도 다름
 class Edge4 implements Comparable<Edge4> {
     public String node;
     public int weight;
@@ -27,7 +26,7 @@ class Edge4 implements Comparable<Edge4> {
     }
 }
 
-// 이렇게 Edge만 있으면 어디서부터 어디로 갔는지 표현이 안되니까 Path class 추가
+// 이렇게 Edge만 있으면 어디서부터 어디로 갔는지 표현이 안되니까 dataStructure.Path class 추가
 class Path {
     public String node1;
     public String node2;
@@ -65,7 +64,7 @@ public class T019_2_Prim_Improved {
         //     해당 key 삭제 후, 다시 priorityQueue에 넣어주게끔 작성할 것이다.
 
         //--▷ priorityQueue에서 데이터를 삭제할 때, 해당 데이터 자체를 인자로 넘겨줘야 한다.
-        //     여기서는, 삭제할 Edge 객체를 찝어줘야 한다.
+        //     여기서는, 삭제할 dataStructure.Edge 객체를 찝어줘야 한다.
         //     해당 객체를 각각의 key마다 따로 hashMap으로 저장해서
         //     해당 객체를 삭제할 필요가 있을 때에는
         //     해당 key에 대한 따로 저장되어 있는 객체 정보를 가져와서 priorityQueue에 넘겨줌

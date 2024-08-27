@@ -1,3 +1,5 @@
+package dataStructure;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -93,7 +95,7 @@ public class T019_1_PrimAlgorithm {
 
             // Edge에서 node1, node2가 있는데 node1자리에 들어가는건 자기 자신임
             // ex) node "A"기준으로 연결된 node "B"와 연결된 간선 "A-B"가 있다고 하면
-            // Edge(weight, "A", "B"); 이렇게 들어가는 것!
+            // dataStructure.Edge(weight, "A", "B"); 이렇게 들어가는 것!
 
             // 그래서 우선순위 큐에서 poll()로 가져온
             // poppedEdge의 node1은 이미 connectedNodes에 들어가있는 건 확실하고

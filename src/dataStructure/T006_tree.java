@@ -1,3 +1,5 @@
+package dataStructure;
+
 public class T006_tree {
     Node head = null;
     public class Node {
@@ -218,7 +220,7 @@ public class T006_tree {
         System.out.println(tr.insertNode(3));
         System.out.println(tr.insertNode(4));
         System.out.println(tr.insertNode(6));
-        System.out.println(tr.search(3));   // T006_tree$Node@677327b6
+        System.out.println(tr.search(3));   // dataStructure.T006_tree$Node@677327b6
         System.out.println(tr.search(9));   // null
         tr.delete(3);
         System.out.println(tr.search(3));   // null

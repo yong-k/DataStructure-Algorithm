@@ -1,4 +1,4 @@
-// 큐(Queue)
+package dataStructure;// 큐(Queue)
 
 import java.util.LinkedList;
 import java.util.Queue;

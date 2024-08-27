@@ -1,3 +1,5 @@
+package dataStructure;
+
 public class T004_1_LinkedList {
     public static class Node<T> {
         // Node 안에는

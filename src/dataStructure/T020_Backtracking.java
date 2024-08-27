@@ -1,4 +1,4 @@
-// backtracking 기법
+package dataStructure;// backtracking 기법
 // 제약 조건 만족 문제에서 해를 찾기 위해서
 // 후보군을 상태공간트리로 만든 다음에 (직접 트리 형태로 코드짜는 거 ㄴㄴ)
 // 조건을 체크하는 Promising 기법과
