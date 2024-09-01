@@ -1,35 +1,28 @@
 import java.io.*;
 import java.util.*;
 public class T999_practice {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine();
-        /*   문자열 길이
-         * a 1
-         * b       1
-         * c    1
-         * d
-         * */
-        int[][] arr = new int[26][str.length() + 1];
-        for (int i = 0; i < str.length(); i++) {
-            arr[str.charAt(i) - 'a'][i]++;
-        }
 
-        int q = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
-        for (int i = 0; i < q; i++) {
-            st = new StringTokenizer(br.readLine());
-            char c = st.nextToken().charAt(0);
-            int s = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
-
-            int sum = 0;
-            for (int j = s; j <= e; j++) {
-                sum += arr[c - 'a'][j];
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] arr = new int[N][2];
+        Arrays.sort(arr, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[1] == o2[1])
+                    return o1[0] - o2[0];
+                return o1[1] - o2[1];
             }
-            sb.append(sum).append('\n');
+        });
+        int count = 0;
+        int end = -1;
+        for (int i = 0; i < N; i++) {
+            if (arr[i][0] >= end) {
+                end = arr[i][1];
+                count++;
+            }
         }
-        System.out.print(sb);
     }
 }
+
+
