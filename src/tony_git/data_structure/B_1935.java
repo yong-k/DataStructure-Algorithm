@@ -2,36 +2,40 @@ package tony_git.data_structure;
 
 import java.util.*;
 
+/*
+후위표기식 계산
+https://siyoon210.tistory.com/2
+*/
 public class B_1935 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        double[] values = new double[N];   // N개의 알파벳에 해당하는 값 저장해놓을 배열
+        int[] values = new int[N];   // N개의 알파벳에 해당하는 값 저장해놓을 배열
         String s = sc.next();
         Stack<Double> stack = new Stack<>();
 
         for (int i = 0; i < N; i++)
-            values[i] = sc.nextDouble();
+            values[i] = sc.nextInt();
 
         for (int i = 0; i < s.length(); i++) {
             char now = s.charAt(i);
             if (now >= 'A' && now <= 'Z')
-                stack.push(values[now - 'A']);
+                stack.push((double) values[now - 'A']);
             else {
-                double num1 = stack.pop();
                 double num2 = stack.pop();
+                double num1 = stack.pop();
                 switch (now) {
                     case '+':
-                        stack.push(num2 + num1);
+                        stack.push(num1 + num2);
                         break;
                     case '-':
-                        stack.push(num2 - num1);
+                        stack.push(num1 - num2);
                         break;
                     case '*':
-                        stack.push(num2 * num1);
+                        stack.push(num1 * num2);
                         break;
                     case '/':
-                        stack.push(num2 / num1);
+                        stack.push(num1 / num2);
                         break;
                 }
             }

@@ -1,51 +1,42 @@
 package tony_git.data_structure;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class B_2346_2 {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        Deque<Balloon> deque = new ArrayDeque<>();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[] arr = new int[N + 1];
+        Deque<Integer> deque = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 1; i <= N; i++) {
-            deque.add(new Balloon(i, Integer.parseInt(st.nextToken())));
+            arr[i] = sc.nextInt();
+            deque.add(i);
         }
 
-        StringBuilder sb = new StringBuilder();
-        Balloon now = deque.removeFirst();
-        sb.append(now.order).append(' ');
-
+        int n = deque.pollFirst();
+        int paper = arr[n];
+        sb.append(n).append(' ');
         while (!deque.isEmpty()) {
-            int paperNum = now.paper;
-            if (paperNum > 0) {
-                for (int i = 1; i < paperNum; i++)
-                    deque.addLast(deque.removeFirst());
+            // 양수면 덱 앞에서 작업, 음수면 덱 뒤에서 작업
+            if (paper > 0) {
+                while (paper > 1) {
+                    deque.addLast(deque.pollFirst());
+                    paper--;
+                }
+                n = deque.pollFirst();
+                paper = arr[n];
             } else {
-                for (int i = paperNum; i < 0; i++)
-                    deque.addFirst(deque.removeLast());
+                while (paper < -1) {
+                    deque.addFirst(deque.pollLast());
+                    paper++;
+                }
+                n = deque.pollLast();
+                paper = arr[n];
             }
-            now = deque.removeFirst();
-            sb.append(now.order).append(' ');
+            sb.append(n).append(' ');
         }
         System.out.println(sb);
     }
 }
-
-class Balloon {
-    int order;
-    int paper;
-
-    public Balloon(int order, int paper) {
-        this.order = order;
-        this.paper = paper;
-    }
-}
-
