@@ -1,43 +1,37 @@
 package tony_git.data_structure;
 
-// https://steady-coding.tistory.com/search/9012
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 public class B_9012 {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
         Stack<Character> stack;
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < T; i++) {
-            String s = br.readLine();
+            String str = sc.next();
             stack = new Stack<>();
-            boolean noFlag = false;
+            boolean flag = true;
 
-            for (int j = 0; j < s.length(); j++) {
-                noFlag = false;
-                char now = s.charAt(j);
-                if (now == '(') {
-                    stack.push(now);
+            for (int j = 0; j < str.length(); j++) {
+                char c = str.charAt(j);
+                if (c == '(') {
+                    stack.push(c);
                 } else {
                     if (stack.isEmpty()) {
-                        noFlag = true;
-                        break;
-                    } else if (stack.peek() == '(') {
-                        stack.pop();
-                    } else {
-                        noFlag = true;
+                        flag = false;
                         break;
                     }
+                    stack.pop();
                 }
             }
-            if (stack.isEmpty() && !noFlag)
-                sb.append("YES").append('\n');
+            if (!stack.isEmpty())
+                flag = false;
+
+            if (flag)
+                sb.append("YES\n");
             else
-                sb.append("NO").append('\n');
+                sb.append("NO\n");
         }
         System.out.println(sb);
     }
