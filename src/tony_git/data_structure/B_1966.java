@@ -1,55 +1,58 @@
 package tony_git.data_structure;
 
-import java.io.*;
 import java.util.*;
 public class B_1966 {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int documentCount;
+        int findNum;
+
+        // 중요도를 담은 우선순위큐를 하나 만들어서, 이번 문서가 우선순위큐 앞에있는거와 같으면 poll
+        Queue<Document> queue;
+        PriorityQueue<Integer> pq;
         StringBuilder sb = new StringBuilder();
 
-        for (int k = 0; k < T; k++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken());
-            int M = Integer.parseInt(st.nextToken());
-            Queue<Document> queue = new LinkedList<>();
-            PriorityQueue<Document> pq = new PriorityQueue<>((d1, d2) -> {
-                return d2.priority - d1.priority;
+        for (int i = 0; i < N; i++) {
+            documentCount = sc.nextInt();
+            findNum = sc.nextInt() + 1;
+            queue = new LinkedList<>();
+            pq = new PriorityQueue<>((o1, o2) -> {
+                return o2 - o1;
             });
 
-            st = new StringTokenizer(br.readLine());
-            for (int i = 0; i < N; i++) {
-                int priority = Integer.parseInt(st.nextToken());
-                queue.add(new Document(i, priority));
-                pq.add(new Document(i, priority));
+            for (int j = 1; j <= documentCount; j++) {
+                int priority = sc.nextInt();
+                queue.add(new Document(j, priority));
+                pq.add(priority);
             }
 
-            // document의 order와 M이 같은 걸 찾으면 된다.
-            int count = 1;
+            int cnt = 1;
             while (!queue.isEmpty()) {
                 Document now = queue.poll();
-                if (now.priority == pq.peek().priority) {
-                    if (now.order == M) {
-                        sb.append(count).append('\n');
+                // 번호 같은지도 봐야되지만, 우선순위가 같은지도 봐야함
+                if (now.priority == pq.peek()) {
+                    if (now.num == findNum) {
+                        sb.append(cnt).append('\n');
                         break;
                     }
                     pq.poll();
-                    count++;
+                    cnt++;
                 } else {
                     queue.add(now);
                 }
             }
         }
-        System.out.print(sb);
+        System.out.println(sb);
     }
 }
 
 class Document {
-    int order;
+    int num;
     int priority;
 
-    public Document(int order, int priority) {
-        this.order = order;
+    Document(int num, int priority) {
+        this.num = num;
         this.priority = priority;
     }
 }
