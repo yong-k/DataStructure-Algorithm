@@ -1,29 +1,24 @@
 package tony_git.prefix_sum;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class B_11659 {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int[] arr = new int[N + 1];
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
 
-        st = new StringTokenizer(br.readLine());
-        for (int i = 1; i <= N; i++)
-            arr[i] = Integer.parseInt(st.nextToken()) + arr[i - 1];
+        int[] sum = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
+            sum[i] = sum[i - 1] + sc.nextInt();
+        }
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int s = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
-            sb.append(arr[e] - arr[s - 1]).append('\n');
+            int s = sc.nextInt();
+            int e = sc.nextInt();
+            sb.append(sum[e] - sum[s - 1]).append('\n');
         }
-        System.out.print(sb);
+        System.out.println(sb);
     }
 }
