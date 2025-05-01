@@ -8,8 +8,24 @@ public class B_10986 {
         int N = sc.nextInt();
         int M = sc.nextInt();
 
-        int[] arr = new int[N];
-        for (int i = 0; i < N; i++)
-            arr[i] = sc.nextInt();
+        long[] sums = new long[N];
+        sums[0] = sc.nextInt();
+        for (int i = 1; i < N; i++) {
+            sums[i] = sums[i - 1] + sc.nextInt();
+        }
+
+        long[] mods = new long[M];
+        for (int i = 0; i < N; i++) {
+            mods[(int)(sums[i] % M)]++;
+        }
+
+        long result = mods[0];
+        for (long mod : mods) {
+            if (mod > 1) {
+                // nC2 = (n-1)n / 2
+                result += (mod - 1) * mod / 2;
+            }
+        }
+        System.out.println(result);
     }
 }

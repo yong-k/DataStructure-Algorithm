@@ -4,19 +4,35 @@ public class T999_practice {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        int M = sc.nextInt();
-
-        int[] sum = new int[N + 1];
-        for (int i = 1; i <= N; i++) {
-            sum[i] = sum[i - 1] + sc.nextInt();
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextInt();
         }
+        Arrays.sort(arr);
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < M; i++) {
-            int s = sc.nextInt();
-            int e = sc.nextInt();
-            sb.append(sum[e] - sum[s - 1]).append('\n');
+        int count = 0;
+        for (int i = 0; i < N; i++) {
+           int find = arr[i];
+           int s = 0;
+           int e = N - 1;
+           while (s < e) {
+               int sum = arr[s] + arr[e];
+               if (sum == find) {
+                   if (s != i && e != i) {
+                       count++;
+                       break;
+                   } else if (s == i) {
+                       s++;
+                   } else {
+                       e--;
+                   }
+               } else if (sum < find) {
+                   s++;
+               } else {
+                   e--;
+               }
+           }
         }
-        System.out.println(sb);
+        System.out.println(count);
     }
 }
