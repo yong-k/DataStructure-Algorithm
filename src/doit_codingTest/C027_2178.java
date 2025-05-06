@@ -1,6 +1,10 @@
-import java.util.*;
+package doit_codingTest;
 
-public class T999_practice {
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class C027_2178 {
     static int N;
     static int M;
     static int[][] map;
