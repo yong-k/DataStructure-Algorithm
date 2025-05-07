@@ -1,36 +1,34 @@
 package doit_codingTest;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class C035_1931 {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        int[][] meetings = new int[N][2];
-        StringTokenizer st;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] arr = new int[N][2];
 
         for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
-            meetings[i][0] = Integer.parseInt(st.nextToken());
-            meetings[i][1] = Integer.parseInt(st.nextToken());
+            arr[i][0] = sc.nextInt();
+            arr[i][1] = sc.nextInt();
         }
 
-        Arrays.sort(meetings, (o1, o2) -> {
+        // 정렬 기준 설정.
+        // 종료 시간 기준 오름차순 정렬 + 시작 시간 기준 오름차순 정렬
+        Arrays.sort(arr, (o1, o2) -> {
             if (o1[1] == o2[1])
                 return o1[0] - o2[0];
             return o1[1] - o2[1];
         });
 
-        int count = 1;
-        int prev = 0;
-        for (int i = 1; i < N; i++) {
-            if (meetings[i][0] >= meetings[prev][1]) {
+        int count = 0;
+        int endTime = -1;
+        for (int i = 0; i < N; i++) {
+            // 다음회의 시작시간이 현재회의 끝나는 시간보다 같거나 커야됨
+            if (endTime <= arr[i][0]) {
                 count++;
-                prev = i;
+                endTime = arr[i][1];
             }
         }
         System.out.println(count);

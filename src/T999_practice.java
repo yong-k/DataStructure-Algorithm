@@ -1,50 +1,33 @@
 import java.util.*;
 
 public class T999_practice {
-    static int N;
-    static int M;
-    static int[][] map;
-    static boolean[][] visited;
-    static int[] dx = {0, 0, -1, 1};
-    static int[] dy = {1, -1, 0, 0};
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        M = sc.nextInt();
-        map = new int[N][M];
-        visited = new boolean[N][M];
+        int N = sc.nextInt();
+        int[][] arr = new int[N][2];
 
         for (int i = 0; i < N; i++) {
-            String s = sc.next();
-            for (int j = 0; j < M; j++) {
-                map[i][j] = s.charAt(j) - '0';
-            }
+            arr[i][0] = sc.nextInt();
+            arr[i][1] = sc.nextInt();
         }
 
-        BFS(0, 0);
-        System.out.println(map[N - 1][M - 1]);
-    }
+        // 정렬 기준 설정.
+        // 종료 시간 기준 오름차순 정렬 + 시작 시간 기준 오름차순 정렬
+        Arrays.sort(arr, (o1, o2) -> {
+            if (o1[1] == o2[1])
+                return o1[0] - o2[0];
+            return o1[1] - o2[1];
+        });
 
-    static void BFS(int i, int j) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{i, j});
-
-        while (!queue.isEmpty()) {
-            int[] now = queue.poll();
-            visited[i][j] = true;
-
-            for (int k = 0; k < 4; k++) {
-                int x = now[0] + dx[k];
-                int y = now[1] + dy[k];
-
-                if (x < 0 || y < 0 || x >= N || y >= M) continue;
-                if (map[x][y] != 0 && !visited[x][y]) {
-                    visited[x][y] = true;
-                    map[x][y] = map[now[0]][now[1]] + 1;
-                    queue.add(new int[]{x, y});
-                }
+        int count = 0;
+        int endTime = -1;
+        for (int i = 0; i < N; i++) {
+            // 다음회의 시작시간이 현재회의 끝나는 시간보다 같거나 커야됨
+            if (endTime <= arr[i][0]) {
+                count++;
+                endTime = arr[i][1];
             }
         }
+        System.out.println(count);
     }
 }
